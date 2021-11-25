@@ -1,25 +1,15 @@
 '''Word Histogram for file'''
-import string
 
 class HistogramData:
     '''Holds data for creating histogram'''
 
     def __init__(self):
-        self.word_frequency = dict()
+        self.word_frequency = {}
 
-    def process_line(self, line):
-        '''Prepares word histogram for a line'''
-        line = line.replace('-', ' ')
-        for word in line.split():
-            word = word.strip(string.punctuation + string.whitespace)
-            word = word.lower()
+    def update(self, words):
+        '''Updates histogram for words'''
+        for word in words:
             self.word_frequency[word] = self.word_frequency.get(word, 0) + 1
-
-    def process_file(self, filename):
-        '''Prepares word histogram for a file'''
-        file_to_process = open(filename, encoding="utf8")
-        for line in file_to_process:
-            self.process_line(line)
 
     def sort_hist_by_freq_desc(self, limit=10):
         '''Sorts histogram'''
